@@ -29,7 +29,10 @@ function App() {
       </CNavbar>
       <div className="mt-4">
         <Switch>
-          <Route path="/user/:id">
+          <Route path="/user/add">
+            <Edit />
+          </Route>
+          <Route path="/user/edit/:id">
             <Edit />
           </Route>
           <Route path="/users">

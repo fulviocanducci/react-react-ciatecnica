@@ -76,16 +76,20 @@ const UserContextProvider = ({ children }) => {
   );
 };
 
-export const useUsers = (source = 'all') => {
+export const useUsers = (source = 'all', text = '') => {
   const { users } = useContext(UserContextContext);
   if (source === 'all') {
-    return users;
+    return text === '' ? users : users.filter((x) => x.userName.includes(text));
   }
   if (source === 'active') {
-    return users.filter((x) => x.status);
+    return text === ''
+      ? users.filter((x) => x.status)
+      : users.filter((x) => x.status && x.userName.includes(text));
   }
   if (source === 'inactive') {
-    return users.filter((x) => !x.status);
+    return text === ''
+      ? users.filter((x) => !x.status)
+      : users.filter((x) => !x.status && x.userName.includes(text));
   }
 };
 
@@ -108,7 +112,40 @@ export const useGetUserById = (id) => {
   const { users } = useContext(UserContextContext);
   const data = users.filter((x) => x.id === +id);
   if (data && data.length === 1) return data[0];
-  return null;
+  return {
+    id: users.length + 1,
+    firstName: '',
+    lastName: '',
+    userName: '',
+    profile: 'driver',
+    status: true,
+    email: '',
+    phone: '',
+    celular: '',
+    password: '',
+    confirmPassword: '',
+    company: 'company1',
+    expire: 'no',
+    dateExpire: '',
+  };
+};
+
+export const useSaveEdit = () => {
+  const { setUsers } = useContext(UserContextContext);
+  return (data) => {
+    setUsers((state) => {
+      return state.map((x) => {
+        return x.id === data.id ? data : x;
+      });
+    });
+  };
+};
+
+export const useSaveAdd = () => {
+  const { setUsers } = useContext(UserContextContext);
+  return (data) => {
+    setUsers((state) => [...state, data]);
+  };
 };
 
 export default UserContextProvider;

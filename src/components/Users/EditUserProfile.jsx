@@ -9,19 +9,19 @@ function EditUserProfile({ data, onChange }) {
         name="userName1"
         label="User Name"
         value={data.userName}
-        onChange={onChange}
+        disabled={true}
       />
       <DivInput
         name="firstName1"
         label="First Name"
         value={data.firstName}
-        onChange={onChange}
+        disabled={true}
       />
       <DivInput
         name="lastName1"
         label="Last Name"
         value={data.lastName}
-        onChange={onChange}
+        disabled={true}
       />
       <div className="row form-group">
         <div className="col-md-3 text-right">
@@ -33,6 +33,7 @@ function EditUserProfile({ data, onChange }) {
             onChange={onChange}
             name="profile"
             id="profile"
+            value={data.profile}
           >
             <option value="driver">Driver</option>
             <option value="office">Office</option>
@@ -47,6 +48,7 @@ function EditUserProfile({ data, onChange }) {
             className="form-control"
             name="company"
             id="company"
+            value={data.company}
           >
             <option value="company1">Company 1</option>
             <option value="company2">Company 2</option>

@@ -8,10 +8,14 @@ import { useChangeStatusUser, useUsers } from '../../contexts/UserContext';
 function Users() {
   let history = useHistory();
   const [status, setStatus] = useState('all');
-  const users = useUsers(status);
+  const [text, setText] = useState('');
+  const users = useUsers(status, text);
   const changeStatusUser = useChangeStatusUser();
   const handleEdit = (id) => {
-    history.push(`/user/${id}`);
+    history.push(`/user/edit/${id}`);
+  };
+  const handleAdd = (id) => {
+    history.push(`/user/add`);
   };
   return (
     <CContainer>
@@ -20,7 +24,11 @@ function Users() {
       <div>
         <CRow>
           <CCol lg="5" className="py-3">
-            <CButton type="button" className="btn btn-primary">
+            <CButton
+              type="button"
+              className="btn btn-primary"
+              onClick={handleAdd}
+            >
               Add
             </CButton>
           </CCol>
@@ -37,6 +45,8 @@ function Users() {
           <CCol sm="3" className="py-3">
             <input
               type="search"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
               className="form-control"
               placeholder="Search"
               aria-label="Search"
@@ -46,14 +56,14 @@ function Users() {
         </CRow>
       </div>
       <div>
-        <table className="table">
-          <thead>
+        <table className="table align-middle">
+          <thead className="table-light">
             <tr>
-              <th>Name</th>
-              <th>User Name</th>
-              <th>Profile</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th className="text-center">Name</th>
+              <th className="text-center">User Name</th>
+              <th className="text-center">Profile</th>
+              <th className="text-center">Status</th>
+              <th className="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -62,8 +72,10 @@ function Users() {
                 <td>{u.firstName + ' ' + u.lastName}</td>
                 <td>{u.userName}</td>
                 <td>{u.profile[0].toUpperCase() + u.profile.substring(1)}</td>
-                <td>{u.status ? 'Active' : 'Inactive'}</td>
-                <td>
+                <td className="text-center">
+                  {u.status ? 'Active' : 'Inactive'}
+                </td>
+                <td style={{ width: '160px' }} className="align-middle">
                   <button
                     className="btn btn-success"
                     onClick={(e) => handleEdit(u.id)}

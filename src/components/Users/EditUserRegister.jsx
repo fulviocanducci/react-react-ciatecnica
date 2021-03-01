@@ -89,13 +89,14 @@ function EditUserRegister({ data, onChange }) {
               <div className="form-check">
                 <input
                   name="expire"
+                  id="expire-yes"
                   type="radio"
                   className="form-check-input"
                   value="yes"
                   checked={data.expire === 'yes'}
                   onChange={onChange}
                 />
-                <label className="form-check-label" htmlFor="expire">
+                <label className="form-check-label" htmlFor="expire-yes">
                   Yes
                 </label>
               </div>
@@ -104,13 +105,14 @@ function EditUserRegister({ data, onChange }) {
               <div className="form-check">
                 <input
                   name="expire"
+                  id="expire-no"
                   type="radio"
                   className="form-check-input"
                   value="no"
                   checked={data.expire === 'no'}
                   onChange={onChange}
                 />
-                <label className="form-check-label" htmlFor="expire">
+                <label className="form-check-label" htmlFor="expire-no">
                   Never
                 </label>
               </div>
