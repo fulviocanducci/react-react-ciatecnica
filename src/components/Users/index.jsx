@@ -17,6 +17,12 @@ function Users() {
   const handleAdd = (id) => {
     history.push(`/user/add`);
   };
+  const handleDeleteStatus = (id) => {
+    if (window.confirm(`Delete record: ${id}?`)) {
+      changeStatusUser(id);
+    }
+  };
+
   return (
     <CContainer>
       <h3>Users</h3>
@@ -84,7 +90,7 @@ function Users() {
                   </button>{' '}
                   <button
                     className="btn btn-danger"
-                    onClick={(e) => changeStatusUser(u.id)}
+                    onClick={(e) => handleDeleteStatus(u.id)}
                     disabled={!u.status}
                   >
                     Delete

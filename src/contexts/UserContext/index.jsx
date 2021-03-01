@@ -96,7 +96,6 @@ export const useUsers = (source = 'all', text = '') => {
 export const useChangeStatusUser = () => {
   const { users, setUsers } = useContext(UserContextContext);
   return (id) => {
-    console.log(id);
     setUsers((state) => {
       return users.map((x) => {
         if (x.id === id) {
