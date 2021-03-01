@@ -26,6 +26,7 @@ function EditUserRegister({ data, onChange }) {
       />
       <DivInput
         name="email"
+        type="email"
         label="E-mail"
         value={data.email}
         onChange={onChange}
@@ -44,6 +45,8 @@ function EditUserRegister({ data, onChange }) {
             value={data.phone}
             onChange={onChange}
             className="form-control"
+            required={true}
+            pattern="\([0-9]{2}\)[0-9]{4}-[0-9]{4}"
           />
         </div>
       </div>
@@ -61,6 +64,8 @@ function EditUserRegister({ data, onChange }) {
             value={data.celular}
             onChange={onChange}
             className="form-control"
+            required={true}
+            pattern="\([0-9]{2}\)[0-9]{5}-[0-9]{4}"
           />
         </div>
       </div>
@@ -71,14 +76,18 @@ function EditUserRegister({ data, onChange }) {
         value={data.password}
         type="password"
         onChange={onChange}
+        required={false}
       />
+
       <DivInput
         name="confirmPassword"
         label="Confirm Password"
         value={data.confirmPassword}
         type="password"
         onChange={onChange}
+        required={false}
       />
+
       <div className="row form-group">
         <div className="col-md-3 text-right">
           <label>Expire:</label>
@@ -128,6 +137,7 @@ function EditUserRegister({ data, onChange }) {
         type="date"
         onChange={onChange}
         disabled={data.expire === 'no'}
+        pattern="\d{1,2}/\d{1,2}/\d{4}"
       />
 
       <div className="row form-group">

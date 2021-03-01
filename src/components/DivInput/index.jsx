@@ -7,6 +7,7 @@ function DivInput({
   onChange,
   type = 'text',
   disabled = false,
+  required = true,
 }) {
   return (
     <div className="row form-group">
@@ -22,6 +23,7 @@ function DivInput({
           value={value}
           onChange={onChange}
           disabled={disabled}
+          required={required}
         />
       </div>
     </div>
