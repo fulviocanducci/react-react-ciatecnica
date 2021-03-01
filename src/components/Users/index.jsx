@@ -1,20 +1,28 @@
-import { CButton, CCol, CContainer, CNavLink, CRow } from '@coreui/react';
 import React, { useState } from 'react';
+
+import { CButton, CCol, CContainer, CRow } from '@coreui/react';
+import { useHistory } from 'react-router-dom';
+
 import { useChangeStatusUser, useUsers } from '../../contexts/UserContext';
 
 function Users() {
+  let history = useHistory();
   const [status, setStatus] = useState('all');
   const users = useUsers(status);
   const changeStatusUser = useChangeStatusUser();
+  const handleEdit = (id) => {
+    history.push(`/user/${id}`);
+  };
   return (
     <CContainer>
-      <h1>Lista de Usuarios</h1>
+      <h3>Users</h3>
+      <hr />
       <div>
         <CRow>
-          <CCol lg="5" className=" py-3">
-            <button type="button" class="btn btn-primary">
+          <CCol lg="5" className="py-3">
+            <CButton type="button" className="btn btn-primary">
               Add
-            </button>
+            </CButton>
           </CCol>
           <CCol md="4" className="py-3">
             <select
@@ -39,33 +47,40 @@ function Users() {
       </div>
       <div>
         <table className="table">
-          <tr>
-            <th>Name</th>
-            <th>User Name</th>
-            <th>Profile</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-          {users.map((u, i) => (
-            <tr key={i}>
-              <td>{u.name}</td>
-              <td>{u.userName}</td>
-              <td>{u.profile}</td>
-              <td>{u.status ? 'Active' : 'Inactive'}</td>
-              <td>
-                <CNavLink className="btn btn-success" to={`/user/${u.id}`}>
-                  Edit
-                </CNavLink>{' '}
-                <button
-                  className="btn btn-danger"
-                  onClick={(e) => changeStatusUser(u.id)}
-                  disabled={!u.status}
-                >
-                  Delete
-                </button>
-              </td>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>User Name</th>
+              <th>Profile</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {users.map((u, i) => (
+              <tr key={i}>
+                <td>{u.firstName + ' ' + u.lastName}</td>
+                <td>{u.userName}</td>
+                <td>{u.profile[0].toUpperCase() + u.profile.substring(1)}</td>
+                <td>{u.status ? 'Active' : 'Inactive'}</td>
+                <td>
+                  <button
+                    className="btn btn-success"
+                    onClick={(e) => handleEdit(u.id)}
+                  >
+                    Edit
+                  </button>{' '}
+                  <button
+                    className="btn btn-danger"
+                    onClick={(e) => changeStatusUser(u.id)}
+                    disabled={!u.status}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </CContainer>

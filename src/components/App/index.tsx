@@ -8,7 +8,7 @@ import {
   CToggler,
 } from '@coreui/react';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from '../Home';
 import Users from '../Users';
 import Edit from '../Users/Edit';
@@ -27,7 +27,7 @@ function App() {
           </CNavbarNav>
         </CCollapse>
       </CNavbar>
-      <div>
+      <div className="mt-4">
         <Switch>
           <Route path="/user/:id">
             <Edit />

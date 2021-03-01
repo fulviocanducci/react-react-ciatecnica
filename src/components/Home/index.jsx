@@ -1,7 +1,13 @@
+import { CContainer } from '@coreui/react';
 import React from 'react';
 
 function Home() {
-  return <div>Home</div>;
+  return (
+    <CContainer>
+      <h3>Home</h3>
+      <hr />
+    </CContainer>
+  );
 }
 
 export default Home;
